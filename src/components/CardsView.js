@@ -1,3 +1,8 @@
+/**
+ * Компонент отвечающий за вывод товаров магазина в виде карточек. Родительский компонент Store
+ *
+ * @param {object} props.cards Массив списка товаров
+ */
 const CardsView = (props) => {
   const { cards } = props;
 

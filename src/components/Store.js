@@ -1,79 +1,83 @@
-import { Component } from 'react';
+// import { Component } from 'react';
+import React, { useState } from 'react';
+
 import IconSwitch from './IconSwitch';
 import CardsView from './CardsView';
 import ListView from './ListView';
 
-class Store extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [
-        {
-          name: 'Nike Metcon 2',
-          price: '130',
-          color: 'red',
-          img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/1.jpg',
-        },
-        {
-          name: 'Nike Metcon 2',
-          price: '130',
-          color: 'green',
-          img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/2.jpg',
-        },
-        {
-          name: 'Nike Metcon 2',
-          price: '130',
-          color: 'blue',
-          img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/3.jpg',
-        },
-        {
-          name: 'Nike Metcon 2',
-          price: '130',
-          color: 'black',
-          img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/4.jpg',
-        },
-        {
-          name: 'Nike free run',
-          price: '170',
-          color: 'black',
-          img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/7.jpg',
-        },
-        {
-          name: 'Nike Metcon 3',
-          price: '150',
-          color: 'green',
-          img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/5.jpg',
-        },
-      ],
-      icon: 'view_list',
-    };
-  }
+const PRODUCTS = [
+  {
+    name: 'Nike Metcon 2',
+    price: '130',
+    color: 'red',
+    img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/1.jpg',
+  },
+  {
+    name: 'Nike Metcon 2',
+    price: '130',
+    color: 'green',
+    img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/2.jpg',
+  },
+  {
+    name: 'Nike Metcon 2',
+    price: '130',
+    color: 'blue',
+    img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/3.jpg',
+  },
+  {
+    name: 'Nike Metcon 2',
+    price: '130',
+    color: 'black',
+    img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/4.jpg',
+  },
+  {
+    name: 'Nike free run',
+    price: '170',
+    color: 'black',
+    img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/7.jpg',
+  },
+  {
+    name: 'Nike Metcon 3',
+    price: '150',
+    color: 'green',
+    img: 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/5.jpg',
+  },
+];
 
-  onSwitch = (icon) => {
+/**
+ * Компонент отвечающий за вывод страницы магазина (кнопка выбора отображения и карточки товаров). Родительский компонент App. Дочерние компоненты IconSwitch (иконка выбора отображения типа товаров на странице), CardsView (блок представляющий товары в виде карточек) и ListView (блок представляющий товары в виде списка)
+ *
+ */
+const Store = () => {
+  const products = PRODUCTS;
+
+  const [icon, setIcon] = useState('view_list');
+
+  /**
+   * Обновляет состояние setIcon при нажатии на иконку
+   *
+   */
+  const SwitchHandler = () => {
     if (icon === 'view_list') {
-      this.setState({ icon: 'view_module' });
+      setIcon('view_module');
     } else {
-      this.setState({ icon: 'view_list' });
+      setIcon('view_list');
     }
   };
 
-  render() {
-    const { products, icon } = this.state;
-
-    const visible =
-      icon === 'view_list' ? (
-        <CardsView cards={products} />
-      ) : (
-        <ListView items={products} />
-      );
-
-    return (
-      <div className="wrapper">
-        <IconSwitch icon={icon} onSwitch={this.onSwitch} />
-        {visible}
-      </div>
+  const visible =
+    icon === 'view_list' ? (
+      <CardsView cards={products} />
+    ) : (
+      <ListView items={products} />
     );
-  }
-}
+
+  return (
+    <div className="wrapper">
+      <IconSwitch icon={icon} onSwitch={SwitchHandler} />
+      {visible}
+    </div>
+  );
+};
 
 export default Store;

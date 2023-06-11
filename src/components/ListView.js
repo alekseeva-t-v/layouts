@@ -1,3 +1,9 @@
+/**
+ * Компонент отвечающий за вывод товаров магазина в виде списка. Родительский компонент Store
+ *
+ * @param {object} props.items Массив списка товаров
+ */
+
 const ListView = (props) => {
   const { items } = props;
 
